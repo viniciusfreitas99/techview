@@ -29,7 +29,7 @@ function plugin_version_techview() {
       'license'        => 'GPLv2+',
       'requirements'   => [
          'glpi' => [
-            'min' => '10.0.0',
+            'min' => '11.0.0',
             'max' => '11.0.99'
          ]
       ]
