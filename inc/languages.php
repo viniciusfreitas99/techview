@@ -23,7 +23,7 @@ if ($cur_lang === 'pt_BR') {
         'col_action'   => 'Ação',
         'btn_check'    => 'Checar',
         'empty_title'  => 'Tudo limpo!',
-        'empty_msg'    => 'Nenhum chamado pendente.',
+        'empty_msg'    => 'Nenhum chamado atribuido a você.',
         'no_req'       => '(Sem req.)',
         'st_new'       => 'Novo',
         'st_assign'    => 'Em Atend.',
