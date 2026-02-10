@@ -5,10 +5,9 @@ error_reporting(E_ALL);
 include ('../../../inc/includes.php');
 Session::checkLoginUser();
 
-
 include_once('../inc/languages.php');
 
-// Ordenação
+// ORDENAçao
 $sort_col = isset($_GET['sort']) ? $_GET['sort'] : 'date';
 $sort_ord = isset($_GET['order']) ? $_GET['order'] : 'DESC';
 
@@ -29,13 +28,14 @@ function getSortLink($col, $label, $current_col, $current_ord) {
     $new_ord = ($current_col == $col && $current_ord == 'DESC') ? 'ASC' : 'DESC';
     $icon = 'fa-sort text-muted';
     if ($current_col == $col) $icon = ($current_ord == 'ASC') ? 'fa-sort-up' : 'fa-sort-down';
-    return "<a href='?sort=$col&order=$new_ord' class='text-dark' style='text-decoration:none;'>$label <i class='fas $icon ml-1'></i></a>";
+    return "<a href='?sort=$col&order=$new_ord' style='text-decoration:none; color: var(--text-color);'>$label <i class='fas $icon ml-1'></i></a>";
 }
 
 Html::header($LANG['page_title'], $_SERVER['PHP_SELF'], "helpdesk", "techview");
 
-// css
+// --- CSS ---
 echo "<style>
+    /* Cards (Mantém fixo pois tem fundo colorido) */
     .card-stats { border: none; border-radius: 8px; color: white; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .card-stats h2 { font-size: 2.5rem; margin: 0; font-weight: bold; }
     .card-stats span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
@@ -44,11 +44,17 @@ echo "<style>
     .bg-gradient-orange { background: linear-gradient(45deg, #FFB64D, #ffcb80); }
     .bg-gradient-red { background: linear-gradient(45deg, #3fb638, #67b962); }
     
+    /* Badges */
     .badge-aprov-waiting { background-color: #ffc107; color: #212529; padding: 5px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; }
     .badge-aprov-ok { background-color: #28a745; color: white; padding: 5px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; }
     .badge-aprov-no { background-color: #dc3545; color: white; padding: 5px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; }
     
+    /* Links da Tabela no Hover */
     th a:hover { color: #007bff !important; }
+
+    /* Correção para DARK MODE - Força cor adaptativa nos links de título */
+    .ticket-link { color: var(--text-color) !important; }
+    .ticket-sub { color: var(--text-muted) !important; }
 </style>";
 
 echo "<div class='m-3'>";
@@ -77,7 +83,6 @@ try {
                 ]
             ]
         ],
-        
         'LEFT JOIN' => [
             'glpi_itilcategories' => [
                 'ON' => [
@@ -191,9 +196,18 @@ try {
 
             echo "<tr>";
             echo "<td class='font-weight-bold'>#{$data['id']}</td>";
-            echo "<td style='font-size:0.85em; font-weight:500; color:#555;'>{$entity_text}</td>"; // ENTIDADE
+            
+            
+            echo "<td style='font-size:0.85em; font-weight:500;' class='ticket-sub'>{$entity_text}</td>";
+            
             echo "<td>{$st_text}</td>";
-            echo "<td><div style='font-weight:bold;'><a href='$link' class='text-dark'>{$data['name']}</a></div><div style='font-size:0.85em; color:#666;'><i class='fas fa-folder-open'></i> {$categoria}</div></td>";
+            
+            
+            echo "<td>
+                    <div style='font-weight:bold;'><a href='$link' class='ticket-link'>{$data['name']}</a></div>
+                    <div style='font-size:0.85em;' class='ticket-sub'><i class='fas fa-folder-open'></i> {$categoria}</div>
+                  </td>";
+            
             echo "<td class='text-center'>{$approval_badge}</td>";
             echo "<td><i class='fas fa-user text-muted mr-1'></i> {$r_name}</td>";
             echo "<td style='font-size:0.9em;'>{$date_open_br}</td>";
