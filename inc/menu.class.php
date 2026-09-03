@@ -1,5 +1,5 @@
 <?php
-// Evita acesso direto ao arquivo
+
 if (!defined('GLPI_ROOT')) { die("Sorry. You can't access this file directly"); }
 
 class PluginTechviewMenu extends CommonGLPI {
@@ -8,14 +8,14 @@ class PluginTechviewMenu extends CommonGLPI {
 
     static function getTypeName($nb = 0) {
         $cur_lang = $_SESSION['glpilanguage'] ?? 'en_GB';
-        // Pega as duas primeiras letras
+        
         $lang_prefix = substr($cur_lang, 0, 2); 
         
         switch ($lang_prefix) {
             case 'pt': return 'Visão do Técnico';
             case 'es': return 'Vista del Técnico';
             case 'fr': return 'Vue du Technicien';
-            default:   return 'Tech View';
+            default:   return 'TechView';
         }
     }
 

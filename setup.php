@@ -2,7 +2,7 @@
 
 if (!defined('GLPI_ROOT')) { die("Sorry. You can't access this file directly"); }
 
-define('PLUGIN_TECHVIEW_VERSION', '1.0.2');
+define('PLUGIN_TECHVIEW_VERSION', '1.1.4');
 
 
 function plugin_techview_check_prerequisites() { return true; }
@@ -22,10 +22,10 @@ function plugin_init_techview() {
 
 function plugin_version_techview() {
    return [
-      'name'           => 'Visão do Técnico',
+      'name'           => 'TechView',
       'version'        => PLUGIN_TECHVIEW_VERSION,
-      'author'         => 'Vinicius',
-      'license'        => 'GPLv2+',
+      'author'         => 'VGF',
+      'license'        => 'GPLv3+',
       'requirements'   => [
          'glpi' => [
             'min' => '11.0.0', 
